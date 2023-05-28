@@ -9,6 +9,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import Login from './pages/Auth/Login';
 import Dashboard from './user/Dashboard.js';
 import PrivateRoute from './components/Routes/Private';
+import ForgotPassword from './pages/Auth/ForgotPassword';
+import AdminRoute from './components/Routes/AdminRoute';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import CreateCategory from './pages/Admin/CreateCategory';
+import CreateProduct from './pages/Admin/CreateProduct';
+import Users from './pages/Admin/users';
+
 
 
 function App() {
@@ -19,7 +26,14 @@ function App() {
       <Route path="/dashboard" element={<PrivateRoute/>}>
          <Route path="user" element={<Dashboard/>}></Route>
       </Route>
+      <Route path="/dashboard" element={<AdminRoute/>}>
+         <Route path="admin" element={<AdminDashboard/>}></Route>
+         <Route path="admin/create-category" element={<CreateCategory/>}></Route>
+         <Route path="admin/create-product" element={<CreateProduct/>}></Route>
+         <Route path="admin/users" element={<Users/>}></Route>
+      </Route>
       <Route path="/register" element={<Register/>}></Route>
+      <Route path="/forgot-password" element={<ForgotPassword/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
       <Route path="/about" element={<About/>}></Route>
       <Route path="/contact" element={<Contact/>}></Route>

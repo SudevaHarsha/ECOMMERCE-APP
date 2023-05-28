@@ -15,8 +15,8 @@ export const isAdmin =async(req,res,next) =>{
     try{
         const user = await userModel.findById(req.user._id);
         if(user?.roles !== 1){
-            return res.status(401).send({
-                success: true,
+            return res.status(200).send({
+                success: false,
                 message:"Unauthorised user",
             });
         } else{
