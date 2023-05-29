@@ -7,7 +7,7 @@ import PagenotFound from './pages/PagenotFound';
 import Register from './pages/Auth/Register';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './pages/Auth/Login';
-import Dashboard from './user/Dashboard.js';
+import Dashboard from './pages/user/Dashboard';
 import PrivateRoute from './components/Routes/Private';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import AdminRoute from './components/Routes/AdminRoute';
@@ -15,6 +15,8 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 import CreateCategory from './pages/Admin/CreateCategory';
 import CreateProduct from './pages/Admin/CreateProduct';
 import Users from './pages/Admin/users';
+import Orders from './pages/user/Orders';
+import Profile from './pages/user/Profile';
 
 
 
@@ -25,6 +27,8 @@ function App() {
       <Route path="/" element={<HomePage/>}></Route>
       <Route path="/dashboard" element={<PrivateRoute/>}>
          <Route path="user" element={<Dashboard/>}></Route>
+         <Route path="user/orders" element={<Orders/>}></Route>
+         <Route path="user/profile" element={<Profile/>}></Route>
       </Route>
       <Route path="/dashboard" element={<AdminRoute/>}>
          <Route path="admin" element={<AdminDashboard/>}></Route>
