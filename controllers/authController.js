@@ -1,5 +1,6 @@
 import { hashPassword, comparePassword } from "../helpers/authHelper.js";
 import  userModel from "../models/userModel.js";
+import orderModel from "../models/orderModel.js";
 import JWT from "jsonwebtoken";
 
 export const registerController=async(req,res)=>{
@@ -175,4 +176,101 @@ export const updateProfileController =async(req,res) =>{
             err
         });
     }
+};
+
+export const getOrdersController =async(req,res) =>{
+    try{
+        const orders = await orderModel.find({buyer:req.user}).populate("products","-photo").populate("buyer","name");
+        res.json(orders);
+    } catch(err){
+        console.log(err);
+        res.status(500).send({
+            success:false,
+            message:"Error while getting orders",
+            err
+        });
+    }
 }
+
+export const getAllOrdersController =async(req,res) =>{
+    try{
+        const orders = await orderModel.find({}).populate("products","-photo").populate("buyer","name").sort({createdAt:"-1"});
+        res.json(orders);
+    } catch(err){
+        console.log(err);
+        res.status(500).send({
+            success:false,
+            message:"Error while getting orders",
+            err
+        });
+    }
+}
+
+export const orderStatusController =async(req,res) =>{
+    try{
+        const {orderId} = req.params;
+        const {status} = req.body;
+        const orders = await orderModel.findByIdAndUpdate(orderId, {status},{new:true});
+        res.json(orders);
+    } catch(err){
+        console.log(err);
+        res.status(500).send({
+            success:false,
+            message:"Error while getting status orders",
+            err
+        });
+    }
+};
+
+export const getAllUsersController =async(req,res) =>{
+    try{
+        const users = await userModel.find({});
+        res.status(200).send({
+            success:true,
+            message:"successfully obtained users",
+            users
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).send({
+            success:false,
+            message:"Error while getting users",
+            err
+        });
+    }
+}
+
+export const deleteUserController =async(req,res) =>{
+    try{
+        const user=await userModel.findByIdAndDelete(req.params.id);
+        res.status(200).send({
+            success:true,
+            message:"deleted user successfully"
+        })
+    } catch(err){
+        console.log(err);
+        res.status(500).send({
+            success:false,
+            message:"Error while deleting users",
+            err
+        });
+    };
+};
+
+export const getUsersByIdController =async(req,res) =>{
+    try{
+        const user = await userModel.findById(req.params.id);
+        res.status(200).send({
+            success:true,
+            message:"user obtained successfully",
+            user
+        })
+    } catch(err){
+        console.log(err);
+        res.status(400).send({
+            success:false,
+            message:"Error while getting user by id",
+            err
+        });
+    };
+};

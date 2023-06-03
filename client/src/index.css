@@ -96,7 +96,7 @@
   color: black !important;
 }
 
-/* .cat-btn {
+.cat-btn {
   padding: 40px 0px;
   font-size: 24px;
   text-transform: uppercase;
@@ -104,12 +104,12 @@
 .cat-btn:hover {
   background-color: #434343;
   color: white;
-} */
+}
 /* ================
 ====dashboard
 =================== */
 
-/* .dashboard {
+.dashboard {
   margin-top: 100px !important;
 }
 
@@ -117,8 +117,7 @@
   background-color: #434343 !important;
   color: white;
   padding: 20px 0px;
-} */
-
+} 
 .register{
   display: flex;
   align-items: center;
