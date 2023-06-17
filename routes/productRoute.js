@@ -1,9 +1,10 @@
 import express from 'express';
 import { isAdmin, requireSignin } from '../middlewares/authMiddleware.js';
-import { brainTreePaymentController, braintreeTokenController, createProductController, deleteProductController, getProductController, getSingleProductController, productCategoryController, productCountController, productFiltersController, productListController, productPhotoController, relatedProductController, searchProductController, updateProductController } from '../controllers/productController.js';
+import { brainTreePaymentController, braintreeTokenController, createMoreImagesController, createProductController, deleteProductController, getProductController, getSingleProductController, productCategoryController, productCountController, productFiltersController, productListController, productPhotoController, relatedProductController, searchProductController, updateProductController } from '../controllers/productController.js';
 import formidable from 'express-formidable';
 const router=express.Router();
 router.post('/create-product',requireSignin,isAdmin,formidable(),createProductController)
+router.post('/create-morephotos/:pid',requireSignin,isAdmin,formidable(),createMoreImagesController)
 
 router.get('/get-product', getProductController)
 router.get('/get-product/:slug', getSingleProductController)

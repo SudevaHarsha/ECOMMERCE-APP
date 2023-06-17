@@ -232,7 +232,7 @@ export const getAllUsersController =async(req,res) =>{
         });
     } catch(err){
         console.log(err);
-        res.status(500).send({
+        res.status(400).send({
             success:false,
             message:"Error while getting users",
             err
@@ -249,7 +249,7 @@ export const deleteUserController =async(req,res) =>{
         })
     } catch(err){
         console.log(err);
-        res.status(500).send({
+        res.status(400).send({
             success:false,
             message:"Error while deleting users",
             err
@@ -270,6 +270,46 @@ export const getUsersByIdController =async(req,res) =>{
         res.status(400).send({
             success:false,
             message:"Error while getting user by id",
+            err
+        });
+    };
+};
+
+export const usersRoleController =async(req,res) =>{
+    try{
+        
+        let role=req.body.role;
+        /* role ? role=0 : role=1; */
+        role = role ? 0 : 1;
+        
+        const user = await userModel.findByIdAndUpdate(req.params.id,{roles:role},{new:true});
+        res.status(200).send({
+            success:true,
+            message:"user updated successfully",
+            user
+        })
+    } catch(err){
+        console.log(err);
+        res.status(400).send({
+            success:false,
+            message:"Error while getting user by id",
+            err
+        });
+    };
+};
+
+
+export const getUserOrdersController =async(req,res) =>{
+    try{
+        const user = await userModel.findById(req.params.uid);
+        console.log(user);
+        const orders = await orderModel.find({buyer:user}).populate("products","-photo").populate("buyer","name");
+        res.json(orders);
+    } catch(err){
+        console.log(err);
+        res.status(500).send({
+            success:false,
+            message:"Error while getting orders",
             err
         });
     };

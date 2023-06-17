@@ -18,6 +18,7 @@ const CreateProduct = () => {
     const [quantity,setQuantity] = useState("");
     const [shipping,setShipping] = useState("");
     const [photo,setPhoto] = useState("");
+    const [morePhotos,setMorePhotos] = useState([]);
 
     const getAllCategory = async () => {
         try {
@@ -146,6 +147,32 @@ const CreateProduct = () => {
                             <button className="btn btn-primary" onClick={handleCreate}>
                             CREATE PRODUCT
                             </button>
+                        </div>
+                        <div className='mb-3'>
+                            <label className='btn btn-outline-secondary col-md-12'>
+                                {morePhotos[0] ? morePhotos[0].name :"Upload Photo"}
+                                <input type='file' name="morePhotos[0]" accept='image/*' onChange={(e)=> setMorePhotos([...morePhotos , e.target.files[0]])} hidden />
+                            </label>
+                        </div>
+                        <div className='mb-3'>
+                            {morePhotos[0] && (
+                                <div className='text-center'>
+                                    <img src={URL.createObjectURL(morePhotos[0])} alt="product-photo" height={"200px"} className='img img-responsive' />
+                                </div>
+                            )}
+                        </div>
+                        <div className='mb-3'>
+                            <label className='btn btn-outline-secondary col-md-12'>
+                                {morePhotos[1] ? morePhotos[1].name :"Upload morePhotos"}
+                                <input type='file' name="morePhotos[1]" accept='image/*' onChange={(e)=> setMorePhotos([...morePhotos , e.target.files[0]])} hidden />
+                            </label>
+                        </div>
+                        <div className='mb-3'>
+                            {morePhotos[1] && (
+                                <div className='text-center'>
+                                    <img src={URL.createObjectURL(morePhotos[1])} alt="product-photo" height={"200px"} className='img img-responsive' />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import productModel from "../models/productModel.js";
 import categoryModel from "../models/categoryModel.js";
+import morephotosModel from "../models/morephotosModel.js";
 import fs from "fs";
 import slugify from "slugify";
 import braintree from "braintree";
@@ -57,6 +58,25 @@ export const createProductController = async (req, res) => {
     });
   }
 };
+
+export const createMoreImagesController = async (req, res) => {
+  try{
+    const productId = req.params;
+    const { morePhotos0 } = req.files;
+    const morephotosobj = new morephotosModel(productId);
+    if (morePhotos0) {
+      morephotosobj.morephoto1.data = fs.readFileSync(morePhotos0.path);
+      morephotosobj.morephoto1.contentType = morePhotos0.type;
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error in creating product",
+    });
+  }
+}
 
 export const getProductController = async(req,res)=>{
   try{
