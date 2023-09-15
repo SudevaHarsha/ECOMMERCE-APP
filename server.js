@@ -27,7 +27,7 @@ app.use('/api/v1/product',productRoutes);
 
 
 app.use('*' ,function(req,res){
-  res.sendFile(path.join(__dirname, './client/build/index.html'))
+  res.sendFile(path.join(__dirname, 'client/build/index.html'))
 })
 
 const PORT = process.env.PORT || 8080;
