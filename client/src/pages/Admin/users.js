@@ -21,18 +21,18 @@ const Users = () => {
     }
   };
 
-  const handleDelete =async(id)=>{
-    try{
-        const {data}= await axios.delete(`/api/v1/auth/delete-user/${id}`);
-        if (data.success) {
-            toast.success('user is deleted');
-            getAllusers();
-          } else {
-            toast.error(data.message);
-          }
-    }catch(error){
-        console.log(error);
-        toast.error("some thing went wrong in deleting user")
+  const handleDelete = async (id) => {
+    try {
+      const { data } = await axios.delete(`/api/v1/auth/delete-user/${id}`);
+      if (data.success) {
+        toast.success('user is deleted');
+        getAllusers();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("some thing went wrong in deleting user")
     }
   }
 
@@ -49,32 +49,32 @@ const Users = () => {
         <div className="col-md-9 ">
           <h1 className="text-center">All Users List</h1>
           <div className="d-flex flex-wrap">
-          <div className='w-75'>
-                        <table className="table">
-                        <thead>
-                            <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-                                {users?.map((u) =>{
-                                    return <>
-                                    <tr>
-                                        <td key={u._id}>{u.name}</td>
-                                        <td>
-                                            <button className='btn btn-primary ms-2'onClick={()=>{navigate(`/dashboard/admin/user-info/${u._id}`)}}>deatils</button>
-                                            <button className='btn btn-danger ms-2'onClick={()=>{handleDelete(u._id)}}>delete</button>
-                                        </td>
-                                    </tr>
-                                    </>
-                                })}
-                           
-                        </tbody>
-                        </table>
+            <div className='w-75'>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
 
-                    </div>
+                  {users?.map((u) => {
+                    return <>
+                      <tr>
+                        <td key={u._id}>{u.name}</td>
+                        <td>
+                          <button className='btn btn-primary ms-2' onClick={() => { navigate(`/dashboard/admin/user-info/${u._id}`) }}>deatils</button>
+                          <button className='btn btn-danger ms-2' onClick={() => { handleDelete(u._id) }}>delete</button>
+                        </td>
+                      </tr>
+                    </>
+                  })}
+
+                </tbody>
+              </table>
+
+            </div>
           </div>
         </div>
       </div>
