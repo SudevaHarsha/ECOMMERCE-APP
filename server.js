@@ -8,9 +8,12 @@ import categoryRoutes from './routes/categoryRoute.js';
 import productRoutes from './routes/productRoute.js'
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 const app = express();
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 app.use(cors());
 app.use(express.json());
