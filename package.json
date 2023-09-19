@@ -10,7 +10,6 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix ./client",
     "dev": "npm run install-concurrently && concurrently \"npm run start\" \"npm run client\""
-   
   },
   "author": "suchendra",
   "license": "ISC",
