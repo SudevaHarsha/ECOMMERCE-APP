@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "install-concurrently": "npm install concurrently",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix ./client",
