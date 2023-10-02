@@ -10,25 +10,25 @@ router.post('/login',loginController);
 
 router.post('/forgot-password',forgetPasswordController);
 
-router.get('/test',requireSignin,isAdmin,testController);
+router.get('/test',testController);
 
-router.get('/user-auth', requireSignin, (req,res)=>{
+router.get('/user-auth', (req,res)=>{
     res.status(200).send({ok: true});
 })
 
-router.get('/admin-auth', requireSignin,isAdmin, (req,res)=>{
+router.get('/admin-auth', (req,res)=>{
     res.status(200).send({ok: true});
 })
 
-router.put('/profile', requireSignin,updateProfileController);
+router.put('/profile',updateProfileController);
 
-router.get("/orders",requireSignin,getOrdersController);
-router.get("/user-orders/:uid",requireSignin,getUserOrdersController);
-router.get("/all-orders",requireSignin,isAdmin,getAllOrdersController);
-router.put("/order-status/:orderId",requireSignin,isAdmin,orderStatusController);
+router.get("/orders",getOrdersController);
+router.get("/user-orders/:uid",getUserOrdersController);
+router.get("/all-orders",getAllOrdersController);
+router.put("/order-status/:orderId",orderStatusController);
 
-router.get("/all-users",requireSignin,isAdmin,getAllUsersController);
-router.delete('/delete-user/:id', requireSignin, isAdmin, deleteUserController);
-router.get('/user/:id', requireSignin, isAdmin, getUsersByIdController);
-router.put('/user-role/:id', requireSignin, isAdmin, usersRoleController);
+router.get("/all-users",getAllUsersController);
+router.delete('/delete-user/:id', deleteUserController);
+router.get('/user/:id', getUsersByIdController);
+router.put('/user-role/:id', usersRoleController);
 export default router;
