@@ -17,7 +17,7 @@ export default function PrivateRoute() {
         setOk(false);
       }
     };
-    if (auth?.user?.roles === 1) setOk(true);
+    if (auth?.user?.role === 1) setOk(true);
   }, [auth?.user?.roles]);
 
   return ok ? <Outlet /> : <Spinner path="" />;

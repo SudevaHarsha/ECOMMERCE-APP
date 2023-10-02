@@ -151,7 +151,8 @@ export const testController = (req,res) =>{
 export const updateProfileController =async(req,res) =>{
     try{
         const {name,email,password,address,phone}=req.body;
-        const user = await userModel.find(email)
+        const user = await userModel.findOne({email:email})
+        console.log(user);
         if(password && password.length <6){
             return res.json({error:'password is required add 6 charcter long'})
         }
