@@ -15,7 +15,7 @@ const UserInfo = () => {
 
   const getUser = async()=>{
     try{
-      const {data} = await axios.get(`/api/v1/auth/user/${params.id}`);
+      const {data} = await axios.get(`https://ecommerce-backend-nxza.onrender.com/api/v1/auth/user/${params.id}`);
       if(data?.success) {
         setUser(data?.user);
       }
@@ -33,7 +33,7 @@ const UserInfo = () => {
       setRoles(1);
     } */
     try{
-      const {data} = await axios.put(`/api/v1/auth/user-role/${id}`,{role})
+      const {data} = await axios.put(`https://ecommerce-backend-nxza.onrender.com/api/v1/auth/user-role/${id}`,{role})
       getUser();
     } catch(error){
       console.log(error);
@@ -42,7 +42,7 @@ const UserInfo = () => {
 
   const getOrders = async() =>{
     try{
-        const {data} = await axios.get(`/api/v1/auth/user-orders/${params.id}`);
+        const {data} = await axios.get(`https://ecommerce-backend-nxza.onrender.com/api/v1/auth/user-orders/${params.id}`);
         setOrders(data)
     } catch(error){
         console.log(error);
@@ -119,7 +119,7 @@ const UserInfo = () => {
                       <div className="row mb-2 p-3 card flex-row" key={p._id}>
                         <div className="col-md-2">
                           <img
-                            src={`/api/v1/product/product-photo/${p._id}`}
+                            src={`https://ecommerce-backend-nxza.onrender.com/api/v1/product/product-photo/${p._id}`}
                             className="card-img-top"
                             alt={p.name}
                             width="70px"

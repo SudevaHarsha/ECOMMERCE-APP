@@ -13,7 +13,7 @@ const Users = () => {
   //getall users
   const getAllusers = async () => {
     try {
-      const { data } = await axios.get("/api/v1/auth/all-users");
+      const { data } = await axios.get("https://ecommerce-backend-nxza.onrender.com/api/v1/auth/all-users");
       setusers(data.users);
     } catch (error) {
       console.log(error);
@@ -23,7 +23,7 @@ const Users = () => {
 
   const handleDelete = async (id) => {
     try {
-      const { data } = await axios.delete(`/api/v1/auth/delete-user/${id}`);
+      const { data } = await axios.delete(`https://ecommerce-backend-nxza.onrender.com/api/v1/auth/delete-user/${id}`);
       if (data.success) {
         toast.success('user is deleted');
         getAllusers();
