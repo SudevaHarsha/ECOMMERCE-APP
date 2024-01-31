@@ -8,10 +8,12 @@ import toast from "react-hot-toast";
 import Layout from "../components/layout/Layout";
 import { AiOutlineReload } from "react-icons/ai";
 import "../styles/Homepage.css";
+import { useAuth } from "../context/Auth";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useCart();
+  const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -175,19 +177,32 @@ const HomePage = () => {
                   <div className="card-name-price">
                     <button
                       className="btn btn-info ms-1"
-                      onClick={() => navigate(`/product/${p.slug}`)}
+                      onClick={() => {
+                        if(auth && auth?.token){
+                          navigate(`/product/${p.slug}`)
+                        }
+                        else{
+                          navigate("/login");
+                        }
+                      }}
                     >
                       More Details
                     </button>
                     <button
                       className="btn btn-dark ms-1"
                       onClick={() => {
-                        setCart([...cart, p]);
+                        if(auth && auth?.token){
+                          setCart([...cart, p]);
                         localStorage.setItem(
                           "cart",
                           JSON.stringify([...cart, p])
                         );
                         toast.success("Item Added to cart");
+                        }
+                        else{
+                          navigate("/login");
+                        }
+                        
                       }}
                     >
                       ADD TO CART

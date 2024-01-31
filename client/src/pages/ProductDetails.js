@@ -5,8 +5,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import "../styles/ProductDetailsStyles.css";
 import { useCart } from "../context/Cart";
 import toast from "react-hot-toast";
-
+import { useAuth } from "../context/Auth";
 const ProductDetails = () => {
+  const [auth, setAuth] = useAuth();
   const params = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
@@ -65,12 +66,18 @@ const ProductDetails = () => {
           </h6>
           <h6>Category : {product?.category?.name}</h6>
           <button class="btn btn-secondary ms-1" onClick={() => {
-                        setCart([...cart, product]);
+                        if(auth && auth?.token){
+                          setCart([...cart, product]);
                         localStorage.setItem(
                           "cart",
                           JSON.stringify([...cart, product])
                         );
                         toast.success("Item Added to cart");
+                        }
+                        else{
+                          navigate("/login");
+                        }
+                        
                       }}>ADD TO CART</button>
         </div>
       </div>
