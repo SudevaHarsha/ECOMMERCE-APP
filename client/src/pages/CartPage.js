@@ -77,6 +77,8 @@ const CartPage = () => {
       setLoading(false);
     }
   };
+
+  
   return (
     <Layout>
       <div className=" cart-page">
